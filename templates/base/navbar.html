@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+</style>
+</head>
+<body>
+  <div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="#news">All tasks</a></li>
+      {% if request.user.is_authenticated %}
+        
+        <li style="float:right"><a href="{% url 'account:logout' %}">Logout</a></li>
+        <li style="float:right"><a href="{% url 'account:login' %}">{{request.user}}</a></li>
+      
+      {% else %}
+      <li style="float:right"><a href="{% url 'account:login' %}">Login</a></li>
+      <li style="float:right"><a href="{% url 'account:sign_up' %}">Signup</a></li>
+      {% endif %}
+
+    </ul>
+  </div>
+</body>
+</html>

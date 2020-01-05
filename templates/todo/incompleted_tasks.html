@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+<body>
+{% block task %}
+	<div>
+		<ul>
+			<li class="link_class">
+			<button type="button" class="btn btn-default" onclick="window.location.href = '{% url 'todo:create-task' %}'">Create Task</button>
+			</li>
+			<li class="link_class">
+			<button type="button" class="btn btn-default" href="#">Mark as complete</button>
+			</li class="link_class">
+			<li>
+				<button type="button" class="btn btn-default" href="#">Mark as incomplete</button>
+			</li>
+		</ul>
+	</div>
+	<div>
+		
+	</div>
+	
+	{% if request.user.is_authenticated %}
+	{% for task in all_incompleted_tasks %}
+    <div id="products" class="row list-group">
+        <div class="item  col-xs-4 col-lg-4">
+            <div class="thumbnail">
+                
+                <div class="caption">
+                	
+                    <h4 class="group inner list-group-item-heading">
+                        {{ task.Task_name }}</h4>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                {{ task.Task_deadline|date:'d b Y' }}</p>
+                        </div>
+
+                        <div class="col-xs-12 col-md-3">
+
+                                
+<!--                                 <form method = "POST">
+                                    {% csrf_token %}
+                                    {{ form.Task_completed }}
+                                    
+                                </form> -->
+                        <div class="col-xs-12 col-md-3">
+                            <a class="btn btn-default" onclick="window.location.href = '{% url 'todo:edit-task' task.id %}'">Edit</a>
+                        </div>
+
+                            
+                            <!-- <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a> -->
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <a class="btn btn-default" onclick="window.location.href = '{% url 'todo:delete-task' task.id %}'">Delete</a>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <h1>Please login</h1>
+    {% endif %}
+{% endblock %}
+</body>

@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% block home %}
+<body>
+  <h1>Sign Up</h1>
+  <p>Please fill in this form to create an account.</p>
+  <hr>
+<form method="POST" style="border:1px solid #ccc">
+	{% csrf_token %}
+  <div class="container">
+
+    {% for field in user_form %}
+
+    <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+
+    <button type="submit">Sign up</button>
+  </div>
+  
+</form>
+
+<h3>if you are already registered please login</h3>
+<a class="btn btn-default" onclick="window.location.href = '{% url 'account:login' %}'">Login</a>
+
+</body>
+
+{% endblock %}

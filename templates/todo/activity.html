@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+<body>
+{% block task %}
+<h2>Your Recent Activity</h2>
+{% for activity in recent_activities_by_user %}
+	{% if activity.activity_type == 'A' %}
+		<h3>you have added a task {{ activity.task }} at {{ activity.date }}</h3>
+	{% elif activity.activity_type == 'D' %}
+		<h3>you have deleted a task {{ activity.task }} at {{ activity.date }}</h3>
+	{% endif %}
+
+{% endfor %}
+{% endblock %}
+</body>
